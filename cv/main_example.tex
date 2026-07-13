@@ -1,0 +1,164 @@
+%% Master CV - Harsh Sachan
+%% Comprehensive overview of all competencies, experience, and achievements.
+%% Use as a master reference when tailoring role-specific CVs.
+%%
+%% Compile with: lualatex main_example.tex
+
+\documentclass[11pt,a4paper,sans]{moderncv}
+\moderncvstyle{banking}
+\moderncvcolor{blue}
+
+% Force both first and last name AND section headings to render in moderncv
+% blue (color1). Default banking on lualatex+MiKTeX leaves these black, which
+% looks inconsistent with the rest of the blue accent scheme.
+\renewcommand*{\firstnamestyle}[1]{{\fontsize{34}{36}\bfseries\upshape\color{color1}#1}}
+\renewcommand*{\lastnamestyle}[1]{{\fontsize{34}{36}\bfseries\upshape\color{color1}#1}}
+\renewcommand*{\sectionstyle}[1]{{\sectionfont\color{color1}#1}}
+
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    urlcolor=blue,
+    pdftitle={Harsh Sachan - CV},
+    pdfpagemode=FullScreen,
+}
+\usepackage[scale=0.80]{geometry}
+\usepackage{import}
+
+% personal data
+\name{Harsh}{Sachan}
+\address{Greater Noida, Uttar Pradesh, India}{}{}
+\phone[mobile]{+91 8604304079}
+\email{hsachan295@gmail.com}
+\extrainfo{\href{https://linkedin.com/in/harsh-sachan-b3b24a2a2}{LinkedIn} | \href{https://github.com/hsachan295-source}{GitHub} | \href{https://leetcode.com/Harshsachan2001/}{LeetCode}}
+
+\begin{document}
+
+\makecvtitle
+
+% ============================================================
+%     PROFILE STATEMENT
+% ============================================================
+
+\vspace{6pt}
+\small{Aspiring Data Scientist, Machine Learning Engineer, and AI Engineer with a strong foundation in Computer Science and Artificial Intelligence. Experienced in building end-to-end Machine Learning pipelines, REST APIs (FastAPI/Flask), retrieval-augmented generation (RAG) agents, and interactive analytics dashboards. Proven ability to own the complete lifecycle of ML systems, from exploratory data analysis and feature engineering to Docker containerization and cloud deployment.}
+
+% ============================================================
+%     CORE COMPETENCIES
+% ============================================================
+
+\section{Core Competencies}
+\vspace{1pt}
+\begin{itemize}
+
+\item \textbf{Languages \& Frameworks}: Python, SQL, C++, Java, FastAPI, Flask, Streamlit, Pydantic v2
+
+\item \textbf{Machine Learning \& Deep Learning}: TensorFlow, Keras, Scikit-Learn, Supervised \& Unsupervised Learning, Regression, Classification, Clustering, Decision Trees, Random Forest, XGBoost, ANN, CNN, RNN, LSTM, GRU
+
+\item \textbf{Generative AI \& Agents}: RAG, Agentic AI, ReAct Agents, Tool Calling, LangGraph Workflows, LangChain, OpenAI API, Gemini API, Mistral AI, Prompt Engineering, Semantic Search, Embeddings
+
+\item \textbf{Data \& BI Databases}: Pandas, NumPy, Matplotlib, Seaborn, Plotly, Power BI, Excel, DAX, PostgreSQL, MySQL, MongoDB, Pinecone, ChromaDB (Vector DBs)
+
+\item \textbf{Tools \& Cloud}: Git, GitHub, Docker, Hugging Face Spaces, Google Cloud Platform (GCP), Oracle Cloud Infrastructure (OCI)
+
+\end{itemize}
+
+% ============================================================
+%     PROJECTS / PROFESSIONAL EXPERIENCE
+% ============================================================
+
+\section{Projects \& Experience}
+\vspace{3pt}
+\begin{itemize}
+
+% --- Project 1 ---
+\item{\cventry{2025}{NexCart -- Full-Stack E-Commerce Product Management}{Independent}{Greater Noida, India}{}{\vspace{1pt}
+\begin{itemize}
+    \item Engineered a production-ready REST API with full CRUD, smart filtering, pagination, and Pydantic v2 cross-field validators.
+    \item Designed a 5-module Streamlit admin dashboard with KPI analytics, inventory control, and live endpoint diagnostics.
+    \item Integrated interactive Plotly charts showing category distribution and price-stock scatter plots.
+\end{itemize}}}
+
+\vspace{3pt}
+
+% --- Project 2 ---
+\item{\cventry{2025}{Agentic RAG System with Gemini and Pinecone}{Independent}{Greater Noida, India}{}{\vspace{1pt}
+\begin{itemize}
+    \item Built a Retrieval-Augmented Generation pipeline with Pinecone vector store for semantic similarity search.
+    \item Enabled PDF question answering and context-aware summarization over large document corpora.
+    \item Implemented agentic knowledge retrieval workflows using LangChain and Gemini API.
+\end{itemize}}}
+
+\vspace{3pt}
+
+% --- Project 3 ---
+\item{\cventry{2024}{NeuralPrice -- AI Laptop Price Predictor}{Independent}{Greater Noida, India}{}{\vspace{1pt}
+\begin{itemize}
+    \item Engineered a 4-layer ANN with 337 features via one-hot encoding and StandardScaler preprocessing.
+    \item Delivered real-time price predictions across INR/USD/EUR with an end-to-end ML pipeline.
+    \item Containerized the application with Docker and deployed it on Hugging Face Spaces for public inference.
+\end{itemize}}}
+
+\vspace{3pt}
+
+% --- Project 4 ---
+\item{\cventry{2024}{NeuralClass -- NLP Spam Classifier}{Independent}{Greater Noida, India}{}{\vspace{1pt}
+\begin{itemize}
+    \item Built a GRU-based sequence model for spam/ham classification with confidence scoring and prediction logging.
+    \item Served model via FastAPI REST API with Docker containerization and Hugging Face Spaces deployment.
+\end{itemize}}}
+
+\end{itemize}
+
+% ============================================================
+%     EDUCATION
+% ============================================================
+
+\section{Education}
+\vspace{1pt}
+\begin{itemize}
+
+\item{\cventry{2022--2026}{B.Tech in Computer Science Engineering (AI Specialization)}{Galgotias College of Engineering and Technology}{Greater Noida, UP, India}{}{\vspace{1pt}
+Cumulative Grade Point Average (CGPA): 8.12 / 10.0\\
+Key Topics: Machine Learning, Deep Learning, Natural Language Processing, Computer Vision, Generative AI \& Agents, Database Management (SQL, NoSQL, Vector DBs).
+}}
+
+\end{itemize}
+
+% ============================================================
+%     LANGUAGES
+% ============================================================
+
+\section{Languages}
+\vspace{1pt}
+\begin{itemize}
+\item English (Professional), Hindi (Native).
+\end{itemize}
+
+% ============================================================
+%     CERTIFICATIONS
+% ============================================================
+
+\section{Certifications}
+\vspace{1pt}
+\begin{itemize}
+\item \textbf{Oracle}: OCI 2025 Certified Data Science Professional | OCI 2025 Certified AI Foundations Associate
+\item \textbf{HackerRank}: SQL (Advanced), Problem Solving, Software Engineer Intern
+\item \textbf{Google Cloud}: Introduction to Generative AI
+\item \textbf{Virtual Experiences}: TATA GenAI Data Analytics | Deloitte Data Analytics | Walmart Advanced Software Engineering
+\end{itemize}
+
+% ============================================================
+%     REFERENCES
+% ============================================================
+
+\section{References}
+\vspace{1pt}
+\begin{itemize}
+\item Available upon request.
+\end{itemize}
+
+\end{document}
