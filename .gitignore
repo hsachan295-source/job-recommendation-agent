@@ -24,6 +24,9 @@ job_scraper/seen_jobs.json
 job_scraper/*.md
 *_BehavioralReport.pdf
 linkedin_Profile.pdf
+tools/config.json
+tools/applied_jobs.json
+
 
 # Personal photos and signatures
 *.jpg
