@@ -148,5 +148,18 @@ def populate():
 
     print(f"[Agent] Database populated! Added {added_count} new job records to {DB_PATH}.")
 
+    # Build missing CV files for all jobs in the database
+    import sys
+    sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+    from auto_applier import tailor_cv
+    
+    print("[Agent] Checking and compiling missing resumes for all registered companies...")
+    for idx, app_record in enumerate(data):
+        clean_company = "".join(c for c in app_record["company"] if c.isalnum()).lower()
+        pdf_path = os.path.join("cv", f"main_{clean_company}.pdf")
+        if not os.path.exists(pdf_path):
+            print(f"[{idx+1}/{len(data)}] Compiling resume for {app_record['company']} ({app_record['role']})...")
+            tailor_cv(app_record["company"], app_record["category"], app_record["role"])
+
 if __name__ == "__main__":
     populate()
