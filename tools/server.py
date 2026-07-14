@@ -50,11 +50,7 @@ def get_pdf_file(pdf_name: str):
     if should_compile:
         if pdf_name.startswith("main_") and pdf_name.endswith(".pdf"):
             clean_company = pdf_name[5:-4]
-            # Search database for matching company information
-            company_name = clean_company.capitalize()
-            category = "DS"
-            role = "Data Scientist"
-            
+            url = ""
             if os.path.exists(DB_PATH):
                 try:
                     with open(DB_PATH, "r", encoding="utf-8") as f:
@@ -65,12 +61,13 @@ def get_pdf_file(pdf_name: str):
                             company_name = app_record["company"]
                             category = app_record["category"]
                             role = app_record["role"]
+                            url = app_record.get("url", "")
                             break
                 except Exception:
                     pass
             
             print(f"\n[On-Demand Server] Compiling dynamic resume for {company_name} ({role})...")
-            tailor_cv(company_name, category, role)
+            tailor_cv(company_name, category, role, url)
             
     if os.path.exists(pdf_path):
         return FileResponse(pdf_path)
@@ -101,7 +98,7 @@ def api_apply(payload: ApplicationPayload):
     
     # 1. Tailor and Compile CV
     # Change directories to compile correctly if needed, tailor_cv handles paths locally
-    cv_path = tailor_cv(payload.company, payload.category, payload.role)
+    cv_path = tailor_cv(payload.company, payload.category, payload.role, payload.url)
     
     if not cv_path:
         raise HTTPException(status_code=500, detail="Error tailoring or compiling CV")

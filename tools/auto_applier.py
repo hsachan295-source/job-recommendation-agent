@@ -4,151 +4,202 @@ import sys
 import json
 import argparse
 import subprocess
+import urllib.request
+from bs4 import BeautifulSoup  # bs4 is installed in standard workspaces
 from datetime import datetime
 
-# Definition of all 8 modular projects with search keywords for dynamic matching
+# Reference list of technical skills for ATS keyword matching
+SKILLS_DB = [
+    "excel", "power bi", "tableau", "sql", "mysql", "python", "tensorflow", 
+    "keras", "docker", "fastapi", "langchain", "gemini", "pinecone", "git", 
+    "pandas", "numpy", "statistics", "machine learning", "deep learning", 
+    "nlp", "llm", "rag", "dax", "power query", "slicers", "pivot tables", 
+    "matplotlib", "seaborn", "scikit-learn", "data visualization", "predictive modeling"
+]
+
+# Modular projects with keywords and dynamic placeholders
 PROJECTS_POOL = [
     {
         "id": "ipl_excel",
         "title": "IPL Performance Dashboard",
         "keywords": ["excel", "power query", "pivot", "slicers", "data analyst", "da", "reporting", "dashboard", "visual"],
-        "latex": r"""\noindent\textbf{IPL Performance Dashboard} $|$ \textit{Microsoft Excel, Power Query, Pivot Tables, Slicers, Data Analysis} \hfill
+        "base_latex": r"""\noindent\textbf{IPL Performance Dashboard} $|$ \textit{{[TOOLS]}} \hfill
 \href{https://github.com/hsachan295-source/Power-BI-Portfolio}{\small GitHub}
 \begin{itemize}
 \resumeItem{Built an interactive IPL performance dashboard using Pivot Tables, Pivot Charts, Slicers, and dynamic Excel charting.}
 \resumeItem{Analyzed team, player, and match metrics (runs, wickets, strike rate, win margins) across multi-year datasets.}
 \resumeItem{Leveraged Power Query for automated data cleaning, merging, and structural transformations of raw IPL datasets.}
-\end{itemize}"""
+\end{itemize}""",
+        "default_tools": "Microsoft Excel, Power Query, Pivot Tables, Slicers, Data Analysis"
     },
     {
         "id": "hr_excel",
         "title": "HR Attrition Analysis Dashboard",
         "keywords": ["excel", "pivot", "attrition", "hr", "charts", "data analyst", "da", "reporting", "dashboard", "retention"],
-        "latex": r"""\noindent\textbf{HR Attrition Analysis Dashboard} $|$ \textit{Microsoft Excel, Pivot Tables, Charts, Slicers, HR Analytics} \hfill
+        "base_latex": r"""\noindent\textbf{HR Attrition Analysis Dashboard} $|$ \textit{{[TOOLS]}} \hfill
 \href{https://github.com/hsachan295-source/Power-BI-Portfolio}{\small GitHub}
 \begin{itemize}
 \resumeItem{Developed an interactive HR analytics dashboard to monitor and analyze employee attrition trends.}
 \resumeItem{Visualized attrition metrics dynamically by department, age group, gender, salary brackets, and specific job roles.}
 \resumeItem{Utilized conditional formatting and advanced Excel charts to surface payroll and retention insights.}
-\end{itemize}"""
+\end{itemize}""",
+        "default_tools": "Microsoft Excel, Pivot Tables, Charts, Slicers, HR Analytics"
     },
     {
         "id": "sql_analysis",
         "title": "SQL Data Analysis Project",
         "keywords": ["sql", "mysql", "database", "query", "queries", "join", "cte", "schema", "optimize", "data analyst", "da"],
-        "latex": r"""\noindent\textbf{SQL Data Analysis Project} $|$ \textit{SQL, MySQL, Window Functions, CTEs, Database Optimization} \hfill
+        "base_latex": r"""\noindent\textbf{SQL Data Analysis Project} $|$ \textit{{[TOOLS]}} \hfill
 \href{https://github.com/hsachan295-source/smart-business-dashboard}{\small GitHub}
 \begin{itemize}
 \resumeItem{Performed comprehensive data analysis and business reporting on transactional databases using advanced MySQL queries.}
 \resumeItem{Implemented complex JOINs, GROUP BY/HAVING statements, Subqueries, Stored Procedures, and Database Views.}
 \resumeItem{Optimized query performance by structured schema modeling and leveraging Common Table Expressions (CTEs) and Window Functions.}
-\end{itemize}"""
+\resumeItem{[DYNAMIC_BULLET]}
+\end{itemize}""",
+        "default_tools": "SQL, MySQL, Window Functions, CTEs, Database Optimization"
     },
     {
         "id": "job_market_bi",
         "title": "AI & ML Jobs Market Analytics Dashboard",
         "keywords": ["power bi", "dax", "bi", "dashboard", "visualization", "modeling", "star schema", "report", "data analyst", "da"],
-        "latex": r"""\noindent\textbf{AI \& ML Jobs Market Analytics Dashboard} $|$ \textit{Power BI, DAX, Star Schema, Data Modeling} \hfill
+        "base_latex": r"""\noindent\textbf{AI \& ML Jobs Market Analytics Dashboard} $|$ \textit{{[TOOLS]}} \hfill
 \href{https://github.com/hsachan295-source/Power-BI-Portfolio}{\small GitHub}
 \begin{itemize}
 \resumeItem{Designed and published a Power BI dashboard analyzing global hiring trends, salaries, and remote job distributions in AI/ML.}
 \resumeItem{Engineered a robust Star Schema model, mapping active/inactive relationships and optimization cross-filter propagation.}
 \resumeItem{Wrote calculated measures and dynamic time-intelligence KPI formulas in DAX.}
-\end{itemize}"""
+\end{itemize}""",
+        "default_tools": "Power BI, DAX, Star Schema, Data Modeling"
     },
     {
         "id": "neural_price",
         "title": "NeuralPrice -- AI Laptop Price Predictor",
         "keywords": ["tensorflow", "keras", "ann", "neural", "predict", "predictive", "machine learning", "ml", "deep learning", "python"],
-        "latex": r"""\noindent\textbf{NeuralPrice -- AI Laptop Price Predictor} $|$ \textit{ANN, TensorFlow, Docker, Hugging Face} \hfill
+        "base_latex": r"""\noindent\textbf{NeuralPrice -- AI Laptop Price Predictor} $|$ \textit{{[TOOLS]}} \hfill
 \href{https://huggingface.co/spaces/Harsh0809/laptop-price-predictor-Ann}{\small Live} $|$
 \href{https://github.com/hsachan295-source/Laptop-Price-Prediction-ANN}{\small GitHub}
 \begin{itemize}
 \resumeItem{Engineered a 4-layer ANN with 337 engineered features using TensorFlow and Scikit-Learn for real-time laptop price prediction.}
 \resumeItem{Built end-to-end pipeline with StandardScaler preprocessing, one-hot encoding, Docker containerization, and Hugging Face deployment.}
-\end{itemize}"""
+\resumeItem{[DYNAMIC_BULLET]}
+\end{itemize}""",
+        "default_tools": "ANN, TensorFlow, Docker, Hugging Face"
     },
     {
         "id": "neural_class",
         "title": "NeuralClass -- NLP Text Classifier",
         "keywords": ["nlp", "text", "classifier", "gru", "spam", "tensorflow", "fastapi", "machine learning", "ml", "python"],
-        "latex": r"""\noindent\textbf{NeuralClass -- NLP Text Classifier} $|$ \textit{GRU, TensorFlow, FastAPI, Docker} \hfill
+        "base_latex": r"""\noindent\textbf{NeuralClass -- NLP Text Classifier} $|$ \textit{{[TOOLS]}} \hfill
 \href{https://huggingface.co/spaces/Harsh0809/gru-text-classifier}{\small Live} $|$
 \href{https://github.com/hsachan295-source/Email-Spam-Detector}{\small GitHub}
 \begin{itemize}
 \resumeItem{Built a GRU-based spam/ham classification model using TensorFlow/Keras with confidence scoring and prediction logging.}
 \resumeItem{Developed FastAPI inference APIs with Docker containerization and Hugging Face Spaces deployment.}
-\end{itemize}"""
+\end{itemize}""",
+        "default_tools": "GRU, TensorFlow, FastAPI, Docker"
     },
     {
         "id": "discord_assistant",
         "title": "AI-Powered Discord Assistant",
         "keywords": ["discord", "bot", "assistant", "agent", "gemini", "tavily", "react", "langchain", "llm", "ai"],
-        "latex": r"""\noindent\textbf{AI-Powered Discord Assistant} $|$ \textit{LangChain, LangGraph, Gemini, Tavily, ReAct} \hfill
+        "base_latex": r"""\noindent\textbf{AI-Powered Discord Assistant} $|$ \textit{{[TOOLS]}} \hfill
 \href{https://github.com/hsachan295-source/AI-Powered-Discord-Assistant}{\small GitHub}
 \begin{itemize}
 \resumeItem{Built an intelligent Discord chatbot with ReAct-based agent workflows, real-time Tavily web search, and Google Gemini LLM.}
-\end{itemize}"""
+\end{itemize}""",
+        "default_tools": "LangChain, LangGraph, Gemini, Tavily, ReAct"
     },
     {
         "id": "gemini_rag",
         "title": "Agentic RAG with Gemini and Pinecone",
         "keywords": ["rag", "pinecone", "gemini", "vector", "similarity", "embedding", "search", "langchain", "llm", "ai"],
-        "latex": r"""\noindent\textbf{Agentic RAG with Gemini and Pinecone} $|$ \textit{RAG, Pinecone, LangChain, Gemini} \hfill
+        "base_latex": r"""\noindent\textbf{Agentic RAG with Gemini and Pinecone} $|$ \textit{{[TOOLS]}} \hfill
 \href{https://github.com/hsachan295-source/Agentic-RAG-with-Gemini-and-Pinecone}{\small GitHub}
 \begin{itemize}
 \resumeItem{Developed a Retrieval-Augmented Generation system using Gemini and Pinecone for semantic vector storage and similarity search.}
-\end{itemize}"""
+\resumeItem{[DYNAMIC_BULLET]}
+\end{itemize}""",
+        "default_tools": "RAG, Pinecone, LangChain, Gemini"
     }
 ]
 
-def get_dynamic_projects(role_title, company_name):
-    # Combine texts to analyze keywords
+def scrape_jd_keywords(url):
+    print(f"[Agent] Attempting to fetch and scan JD keywords from: {url}")
+    matched_skills = []
+    try:
+        req = urllib.request.Request(
+            url, 
+            headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
+        )
+        with urllib.request.urlopen(req, timeout=5) as response:
+            html = response.read()
+            soup = BeautifulSoup(html, 'html.parser')
+            text = soup.get_text().lower()
+            
+            for skill in SKILLS_DB:
+                if skill in text:
+                    matched_skills.append(skill)
+        print(f"[Agent] Matched JD skills: {matched_skills}")
+    except Exception as e:
+        print(f"[Agent] Warning: Could not scrape JD content ({e}). Using default search text.")
+    return matched_skills
+
+def get_ats_optimized_projects(role_title, company_name, url=""):
     search_text = f"{role_title} {company_name}".lower()
     
-    # Calculate keyword scores for each project in pool
+    # Get matching skills from URL scraping
+    jd_skills = []
+    if url and url.startswith("http"):
+        jd_skills = scrape_jd_keywords(url)
+        
+    # Fallback to scanning role title/company name if scraping yields nothing
+    if not jd_skills:
+        for skill in SKILLS_DB:
+            if skill in search_text:
+                jd_skills.append(skill)
+
+    # Calculate scoring based on matching skills
     scored_projects = []
     for proj in PROJECTS_POOL:
         score = 0
         for kw in proj["keywords"]:
-            if kw in search_text:
+            if kw in search_text or kw in jd_skills:
                 score += 1
         scored_projects.append((score, proj))
         
     # Sort projects by score descending
     scored_projects.sort(key=lambda x: x[0], reverse=True)
     
-    # Select the top projects matching keywords (we will select exactly 4 projects for resume balance)
+    # Pick top 4 projects
     selected_projects = []
     for score, proj in scored_projects[:4]:
-        selected_projects.append(proj["latex"])
+        # Perform dynamic tool lists replacement in LaTeX content
+        # Find intersection of project keywords & matched skills from JD
+        intersect_skills = [s.title() for s in jd_skills if s in proj["keywords"]]
         
-    # If no keyword matches were found (all scores are 0), fall back to standard category-based templates
-    total_score = sum(score for score, _ in scored_projects[:4])
-    if total_score == 0:
-        print("[Agent] No specific keywords matched. Falling back to default category projects.")
-        # Fallback based on job role keywords
-        is_da = any(k in search_text for k in ["analyst", "da", "excel", "sql", "power bi", "bi", "reporting"])
-        if is_da:
-            # Return DA defaults
-            selected_projects = [
-                PROJECTS_POOL[0]["latex"], # IPL
-                PROJECTS_POOL[1]["latex"], # HR Attrition
-                PROJECTS_POOL[2]["latex"], # SQL Analysis
-                PROJECTS_POOL[3]["latex"]  # Power BI
-            ]
-        else:
-            # Return DS/ML defaults
-            selected_projects = [
-                PROJECTS_POOL[4]["latex"], # NeuralPrice
-                PROJECTS_POOL[5]["latex"], # NeuralClass
-                PROJECTS_POOL[6]["latex"], # Discord Assistant
-                PROJECTS_POOL[7]["latex"]  # Gemini RAG
-            ]
+        # Build optimized tools string
+        tools_list = proj["default_tools"]
+        if intersect_skills:
+            # Prepend matching JD skills to default tools list to increase ATS match
+            unique_new = [s for s in intersect_skills if s.lower() not in tools_list.lower()]
+            if unique_new:
+                tools_list = f"{', '.join(unique_new)}, {tools_list}"
+                
+        # Handle dynamic bullet points if present (highlighting JD skills matches)
+        latex_content = proj["base_latex"].replace("[TOOLS]", tools_list)
+        
+        if "[DYNAMIC_BULLET]" in latex_content:
+            bullet_text = "Tailored project implementation to align with target role guidelines."
+            if jd_skills:
+                bullet_text = f"Optimized execution models using {', '.join([s.title() for s in jd_skills[:3]])} mapping role requirements."
+            latex_content = latex_content.replace("[DYNAMIC_BULLET]", f"\\resumeItem{{{bullet_text}}}")
             
+        selected_projects.append(latex_content)
+        
     return "\n\n\\vspace{1.5pt}\n".join(selected_projects)
 
-def tailor_cv(company, category, role_title=""):
+def tailor_cv(company, category, role_title="", url=""):
     base_cv_path = os.path.join("cv", "main_harsh.tex")
     if not os.path.exists(base_cv_path):
         print(f"Error: Base CV template {base_cv_path} not found.")
@@ -168,9 +219,9 @@ def tailor_cv(company, category, role_title=""):
     header = content[:project_sec_start + len(r"\section{Projects}")]
     footer = content[cert_sec_start:]
 
-    # Dynamically select tailored projects
+    # Dynamically select ATS optimized projects using job URL details
     use_role = role_title if role_title else category
-    project_block = get_dynamic_projects(use_role, company)
+    project_block = get_ats_optimized_projects(use_role, company, url)
 
     # Build new LaTeX content
     new_latex = f"{header}\n\n{project_block}\n\n\\vspace{{-2mm}}\n\n{footer}"
@@ -263,8 +314,8 @@ def main():
 
     print(f"\n[Agent] Launching Auto-Applier for {args.role} at {args.company}...")
     
-    # 1. Tailor and Compile CV (passing role title for dynamic selection)
-    cv_path = tailor_cv(args.company, args.category, args.role)
+    # 1. Tailor and Compile CV (passing role title and URL for dynamic ATS selection)
+    cv_path = tailor_cv(args.company, args.category, args.role, args.url)
     
     if not cv_path:
         print("Error tailoring CV. Aborting application logging.")
