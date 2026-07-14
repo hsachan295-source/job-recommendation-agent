@@ -140,7 +140,7 @@ def run_bulk():
         print(f"\n[{idx+1}/{len(JOBS_LIST)}] Processing: {job['role']} at {job['company']} ({job['category']})...")
         
         # 1. Tailor and Compile CV
-        cv_path = tailor_cv(job["company"], job["category"])
+        cv_path = tailor_cv(job["company"], job["category"], job["role"])
         
         if cv_path:
             # 2. Log in JSON Database
