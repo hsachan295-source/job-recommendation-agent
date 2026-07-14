@@ -6,116 +6,149 @@ import argparse
 import subprocess
 from datetime import datetime
 
-# Define Project Blocks for latex customization
-GENAI_PROJECTS = r"""\noindent\textbf{Ollama Code Assistant} $|$ \textit{Python, Gradio, Ollama, CodeLlama, Modelfile} \hfill
-\href{https://github.com/hsachan295-source/Ollama-Code-Assistant}{\small GitHub}
-\begin{itemize}
-\resumeItem{Developed an interactive, local AI Code Teaching Assistant named "AmitCodes" built with Python and Gradio.}
-\resumeItem{Customized a local CodeLlama model via custom Modelfile settings (system prompt persona, temperature) for beginner-friendly programming support.}
-\end{itemize}
-
-\vspace{1.5pt}
-\noindent\textbf{Astra DB PDF RAG with Ollama} $|$ \textit{Astra DB, Ollama, LangChain, PyPDF2, RAG} \hfill
-\href{https://github.com/hsachan295-source/astra-db-pdf-rag-ollama}{\small GitHub}
-\begin{itemize}
-\resumeItem{Developed a Retrieval-Augmented Generation (RAG) system using Astra DB for cloud vector database storage.}
-\resumeItem{Integrated Ollama locally for generating vector embeddings (nomic-embed-text) and chat response generation (gemma3:1b) using LangChain.}
-\end{itemize}
-
-\vspace{1.5pt}
-\noindent\textbf{NeuralPrice -- AI Laptop Price Predictor} $|$ \textit{ANN, TensorFlow, Docker, Hugging Face} \hfill
-\href{https://huggingface.co/spaces/Harsh0809/laptop-price-predictor-Ann}{\small Live} $|$
-\href{https://github.com/hsachan295-source/Laptop-Price-Prediction-ANN}{\small GitHub}
-\begin{itemize}
-\resumeItem{Engineered a 4-layer ANN with 337 engineered features using TensorFlow and Scikit-Learn for real-time laptop price prediction.}
-\resumeItem{Built end-to-end pipeline with StandardScaler preprocessing, one-hot encoding, Docker containerization, and Hugging Face deployment.}
-\end{itemize}
-
-\vspace{1.5pt}
-\noindent\textbf{NeuralClass -- NLP Text Classifier} $|$ \textit{GRU, TensorFlow, FastAPI, Docker} \hfill
-\href{https://huggingface.co/spaces/Harsh0809/gru-text-classifier}{\small Live} $|$
-\href{https://github.com/hsachan295-source/Email-Spam-Detector}{\small GitHub}
-\begin{itemize}
-\resumeItem{Built a GRU-based spam/ham classification model using TensorFlow/Keras with confidence scoring and prediction logging.}
-\resumeItem{Developed FastAPI inference APIs with Docker containerization and Hugging Face Spaces deployment.}
-\end{itemize}
-
-\vspace{1.5pt}
-\noindent\textbf{AI-Powered Discord Assistant} $|$ \textit{LangChain, LangGraph, Gemini, Tavily, ReAct} \hfill
-\href{https://github.com/hsachan295-source/AI-Powered-Discord-Assistant}{\small GitHub}
-\begin{itemize}
-\resumeItem{Built an intelligent Discord chatbot with ReAct-based agent workflows, real-time Tavily web search, and Google Gemini LLM.}
-\end{itemize}
-
-\vspace{1.5pt}
-\noindent\textbf{Agentic RAG with Gemini and Pinecone} $|$ \textit{RAG, Pinecone, LangChain, Gemini} \hfill
-\href{https://github.com/hsachan295-source/Agentic-RAG-with-Gemini-and-Pinecone}{\small GitHub}
-\begin{itemize}
-\resumeItem{Developed a Retrieval-Augmented Generation system using Gemini and Pinecone for semantic vector storage and similarity search.}
-\end{itemize}
-
-\vspace{1.5pt}
-\noindent\textbf{AI \& ML Jobs Market Analytics Dashboard} $|$ \textit{Power BI, DAX, Star Schema} \hfill
-\href{https://github.com/hsachan295-source/Power-BI-Portfolio}{\small GitHub}
-\begin{itemize}
-\resumeItem{Designed a Power BI dashboard analyzing AI/ML hiring trends, salary distributions, and remote job demand across global markets.}
-\end{itemize}
-"""
-
-DATA_ANALYTICS_PROJECTS = r"""\noindent\textbf{IPL Performance Dashboard} $|$ \textit{Microsoft Excel, Power Query, Pivot Tables, Slicers, Data Analysis} \hfill
+# Definition of all 8 modular projects with search keywords for dynamic matching
+PROJECTS_POOL = [
+    {
+        "id": "ipl_excel",
+        "title": "IPL Performance Dashboard",
+        "keywords": ["excel", "power query", "pivot", "slicers", "data analyst", "da", "reporting", "dashboard", "visual"],
+        "latex": r"""\noindent\textbf{IPL Performance Dashboard} $|$ \textit{Microsoft Excel, Power Query, Pivot Tables, Slicers, Data Analysis} \hfill
 \href{https://github.com/hsachan295-source/Power-BI-Portfolio}{\small GitHub}
 \begin{itemize}
 \resumeItem{Built an interactive IPL performance dashboard using Pivot Tables, Pivot Charts, Slicers, and dynamic Excel charting.}
 \resumeItem{Analyzed team, player, and match metrics (runs, wickets, strike rate, win margins) across multi-year datasets.}
 \resumeItem{Leveraged Power Query for automated data cleaning, merging, and structural transformations of raw IPL datasets.}
-\end{itemize}
-
-\vspace{1.5pt}
-\noindent\textbf{HR Attrition Analysis Dashboard} $|$ \textit{Microsoft Excel, Pivot Tables, Charts, Slicers, HR Analytics} \hfill
+\end{itemize}"""
+    },
+    {
+        "id": "hr_excel",
+        "title": "HR Attrition Analysis Dashboard",
+        "keywords": ["excel", "pivot", "attrition", "hr", "charts", "data analyst", "da", "reporting", "dashboard", "retention"],
+        "latex": r"""\noindent\textbf{HR Attrition Analysis Dashboard} $|$ \textit{Microsoft Excel, Pivot Tables, Charts, Slicers, HR Analytics} \hfill
 \href{https://github.com/hsachan295-source/Power-BI-Portfolio}{\small GitHub}
 \begin{itemize}
 \resumeItem{Developed an interactive HR analytics dashboard to monitor and analyze employee attrition trends.}
 \resumeItem{Visualized attrition metrics dynamically by department, age group, gender, salary brackets, and specific job roles.}
-\resumeItem{Utilized conditional formatting and advanced Excel charts to surface actionable workforce retention insights.}
-\end{itemize}
-
-\vspace{1.5pt}
-\noindent\textbf{SQL Data Analysis Project} $|$ \textit{SQL, MySQL, Window Functions, CTEs, Database Optimization} \hfill
+\resumeItem{Utilized conditional formatting and advanced Excel charts to surface payroll and retention insights.}
+\end{itemize}"""
+    },
+    {
+        "id": "sql_analysis",
+        "title": "SQL Data Analysis Project",
+        "keywords": ["sql", "mysql", "database", "query", "queries", "join", "cte", "schema", "optimize", "data analyst", "da"],
+        "latex": r"""\noindent\textbf{SQL Data Analysis Project} $|$ \textit{SQL, MySQL, Window Functions, CTEs, Database Optimization} \hfill
 \href{https://github.com/hsachan295-source/smart-business-dashboard}{\small GitHub}
 \begin{itemize}
 \resumeItem{Performed comprehensive data analysis and business reporting on transactional databases using advanced MySQL queries.}
 \resumeItem{Implemented complex JOINs, GROUP BY/HAVING statements, Subqueries, Stored Procedures, and Database Views.}
 \resumeItem{Optimized query performance by structured schema modeling and leveraging Common Table Expressions (CTEs) and Window Functions.}
-\end{itemize}
-
-\vspace{1.5pt}
-\noindent\textbf{AI \& ML Jobs Market Analytics Dashboard} $|$ \textit{Power BI, DAX, Star Schema, Data Modeling} \hfill
+\end{itemize}"""
+    },
+    {
+        "id": "job_market_bi",
+        "title": "AI & ML Jobs Market Analytics Dashboard",
+        "keywords": ["power bi", "dax", "bi", "dashboard", "visualization", "modeling", "star schema", "report", "data analyst", "da"],
+        "latex": r"""\noindent\textbf{AI \& ML Jobs Market Analytics Dashboard} $|$ \textit{Power BI, DAX, Star Schema, Data Modeling} \hfill
 \href{https://github.com/hsachan295-source/Power-BI-Portfolio}{\small GitHub}
 \begin{itemize}
 \resumeItem{Designed and published a Power BI dashboard analyzing global hiring trends, salaries, and remote job distributions in AI/ML.}
 \resumeItem{Engineered a robust Star Schema model, mapping active/inactive relationships and optimization cross-filter propagation.}
 \resumeItem{Wrote calculated measures and dynamic time-intelligence KPI formulas in DAX.}
-\end{itemize}
-
-\vspace{1.5pt}
-\noindent\textbf{NeuralPrice -- AI Laptop Price Predictor} $|$ \textit{ANN, TensorFlow, Docker, Hugging Face} \hfill
+\end{itemize}"""
+    },
+    {
+        "id": "neural_price",
+        "title": "NeuralPrice -- AI Laptop Price Predictor",
+        "keywords": ["tensorflow", "keras", "ann", "neural", "predict", "predictive", "machine learning", "ml", "deep learning", "python"],
+        "latex": r"""\noindent\textbf{NeuralPrice -- AI Laptop Price Predictor} $|$ \textit{ANN, TensorFlow, Docker, Hugging Face} \hfill
 \href{https://huggingface.co/spaces/Harsh0809/laptop-price-predictor-Ann}{\small Live} $|$
 \href{https://github.com/hsachan295-source/Laptop-Price-Prediction-ANN}{\small GitHub}
 \begin{itemize}
 \resumeItem{Engineered a 4-layer ANN with 337 engineered features using TensorFlow and Scikit-Learn for real-time laptop price prediction.}
 \resumeItem{Built end-to-end pipeline with StandardScaler preprocessing, one-hot encoding, Docker containerization, and Hugging Face deployment.}
-\end{itemize}
-
-\vspace{1.5pt}
-\noindent\textbf{Agentic RAG with Gemini and Pinecone} $|$ \textit{RAG, Pinecone, LangChain, Gemini} \hfill
+\end{itemize}"""
+    },
+    {
+        "id": "neural_class",
+        "title": "NeuralClass -- NLP Text Classifier",
+        "keywords": ["nlp", "text", "classifier", "gru", "spam", "tensorflow", "fastapi", "machine learning", "ml", "python"],
+        "latex": r"""\noindent\textbf{NeuralClass -- NLP Text Classifier} $|$ \textit{GRU, TensorFlow, FastAPI, Docker} \hfill
+\href{https://huggingface.co/spaces/Harsh0809/gru-text-classifier}{\small Live} $|$
+\href{https://github.com/hsachan295-source/Email-Spam-Detector}{\small GitHub}
+\begin{itemize}
+\resumeItem{Built a GRU-based spam/ham classification model using TensorFlow/Keras with confidence scoring and prediction logging.}
+\resumeItem{Developed FastAPI inference APIs with Docker containerization and Hugging Face Spaces deployment.}
+\end{itemize}"""
+    },
+    {
+        "id": "discord_assistant",
+        "title": "AI-Powered Discord Assistant",
+        "keywords": ["discord", "bot", "assistant", "agent", "gemini", "tavily", "react", "langchain", "llm", "ai"],
+        "latex": r"""\noindent\textbf{AI-Powered Discord Assistant} $|$ \textit{LangChain, LangGraph, Gemini, Tavily, ReAct} \hfill
+\href{https://github.com/hsachan295-source/AI-Powered-Discord-Assistant}{\small GitHub}
+\begin{itemize}
+\resumeItem{Built an intelligent Discord chatbot with ReAct-based agent workflows, real-time Tavily web search, and Google Gemini LLM.}
+\end{itemize}"""
+    },
+    {
+        "id": "gemini_rag",
+        "title": "Agentic RAG with Gemini and Pinecone",
+        "keywords": ["rag", "pinecone", "gemini", "vector", "similarity", "embedding", "search", "langchain", "llm", "ai"],
+        "latex": r"""\noindent\textbf{Agentic RAG with Gemini and Pinecone} $|$ \textit{RAG, Pinecone, LangChain, Gemini} \hfill
 \href{https://github.com/hsachan295-source/Agentic-RAG-with-Gemini-and-Pinecone}{\small GitHub}
 \begin{itemize}
 \resumeItem{Developed a Retrieval-Augmented Generation system using Gemini and Pinecone for semantic vector storage and similarity search.}
-\end{itemize}
-"""
+\end{itemize}"""
+    }
+]
 
+def get_dynamic_projects(role_title, company_name):
+    # Combine texts to analyze keywords
+    search_text = f"{role_title} {company_name}".lower()
+    
+    # Calculate keyword scores for each project in pool
+    scored_projects = []
+    for proj in PROJECTS_POOL:
+        score = 0
+        for kw in proj["keywords"]:
+            if kw in search_text:
+                score += 1
+        scored_projects.append((score, proj))
+        
+    # Sort projects by score descending
+    scored_projects.sort(key=lambda x: x[0], reverse=True)
+    
+    # Select the top projects matching keywords (we will select exactly 4 projects for resume balance)
+    selected_projects = []
+    for score, proj in scored_projects[:4]:
+        selected_projects.append(proj["latex"])
+        
+    # If no keyword matches were found (all scores are 0), fall back to standard category-based templates
+    total_score = sum(score for score, _ in scored_projects[:4])
+    if total_score == 0:
+        print("[Agent] No specific keywords matched. Falling back to default category projects.")
+        # Fallback based on job role keywords
+        is_da = any(k in search_text for k in ["analyst", "da", "excel", "sql", "power bi", "bi", "reporting"])
+        if is_da:
+            # Return DA defaults
+            selected_projects = [
+                PROJECTS_POOL[0]["latex"], # IPL
+                PROJECTS_POOL[1]["latex"], # HR Attrition
+                PROJECTS_POOL[2]["latex"], # SQL Analysis
+                PROJECTS_POOL[3]["latex"]  # Power BI
+            ]
+        else:
+            # Return DS/ML defaults
+            selected_projects = [
+                PROJECTS_POOL[4]["latex"], # NeuralPrice
+                PROJECTS_POOL[5]["latex"], # NeuralClass
+                PROJECTS_POOL[6]["latex"], # Discord Assistant
+                PROJECTS_POOL[7]["latex"]  # Gemini RAG
+            ]
+            
+    return "\n\n\\vspace{1.5pt}\n".join(selected_projects)
 
-def tailor_cv(company, category):
+def tailor_cv(company, category, role_title=""):
     base_cv_path = os.path.join("cv", "main_harsh.tex")
     if not os.path.exists(base_cv_path):
         print(f"Error: Base CV template {base_cv_path} not found.")
@@ -135,8 +168,9 @@ def tailor_cv(company, category):
     header = content[:project_sec_start + len(r"\section{Projects}")]
     footer = content[cert_sec_start:]
 
-    # Select project block based on category
-    project_block = DATA_ANALYTICS_PROJECTS if category.upper() in ["DA", "EXCEL", "SQL", "ANALYST"] else GENAI_PROJECTS
+    # Dynamically select tailored projects
+    use_role = role_title if role_title else category
+    project_block = get_dynamic_projects(use_role, company)
 
     # Build new LaTeX content
     new_latex = f"{header}\n\n{project_block}\n\n\\vspace{{-2mm}}\n\n{footer}"
@@ -152,7 +186,7 @@ def tailor_cv(company, category):
     with open(tex_path, "w", encoding="utf-8") as f:
         f.write(new_latex)
 
-    print(f"Tailored CV written: {tex_path}")
+    print(f"Dynamically tailored CV written: {tex_path}")
 
     # Compile using lualatex
     print(f"Compiling {tex_path} to PDF using lualatex...")
@@ -229,8 +263,8 @@ def main():
 
     print(f"\n[Agent] Launching Auto-Applier for {args.role} at {args.company}...")
     
-    # 1. Tailor and Compile CV
-    cv_path = tailor_cv(args.company, args.category)
+    # 1. Tailor and Compile CV (passing role title for dynamic selection)
+    cv_path = tailor_cv(args.company, args.category, args.role)
     
     if not cv_path:
         print("Error tailoring CV. Aborting application logging.")

@@ -52,7 +52,7 @@ def api_apply(payload: ApplicationPayload):
     
     # 1. Tailor and Compile CV
     # Change directories to compile correctly if needed, tailor_cv handles paths locally
-    cv_path = tailor_cv(payload.company, payload.category)
+    cv_path = tailor_cv(payload.company, payload.category, payload.role)
     
     if not cv_path:
         raise HTTPException(status_code=500, detail="Error tailoring or compiling CV")
