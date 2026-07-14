@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Job Search | Autofill Agent Setup</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Plus+Jakarta+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0d0f14;
+            --card-bg: rgba(22, 28, 38, 0.6);
+            --primary: #00ffd0;
+            --primary-hover: #00e0b8;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --border: rgba(255, 255, 255, 0.08);
+            --glow: rgba(0, 255, 208, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 255, 208, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(0, 112, 243, 0.05) 0%, transparent 40%);
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, var(--primary), transparent, #0070f3);
+            z-index: -1;
+            border-radius: 26px;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff 30%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        p.subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .step-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .step-number {
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: var(--primary);
+            color: #000;
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 2px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 0 10px var(--glow);
+        }
+
+        .bookmark-btn-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem 0;
+        }
+
+        .bookmark-btn {
+            display: inline-block;
+            background: var(--primary);
+            color: #0d0f14;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            cursor: grab;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 20px var(--glow);
+            border: 2px solid transparent;
+            user-select: none;
+        }
+
+        .bookmark-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(0, 255, 208, 0.4);
+            background: #ffffff;
+            color: #0d0f14;
+        }
+
+        .bookmark-btn:active {
+            cursor: grabbing;
+        }
+
+        ol {
+            margin-left: 1.5rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        li {
+            margin-bottom: 0.75rem;
+        }
+
+        strong {
+            color: var(--text-main);
+        }
+
+        /* Test sandbox zone */
+        .test-sandbox {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+        }
+
+        .sandbox-title {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        input {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px 14px;
+            color: var(--text-main);
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 10px var(--glow);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .pulse {
+            animation: pulse-animation 2s infinite;
+        }
+
+        @keyframes pulse-animation {
+            0% {
+                box-shadow: 0 0 0 0 rgba(0, 255, 208, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(0, 255, 208, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(0, 255, 208, 0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>⚡ AI Job Search | Autofill Agent</h1>
+        <p class="subtitle">Drag the button to your Bookmarks Bar to apply to jobs with 1-click</p>
+    </header>
+
+    <div class="step-card">
+        <div class="step-number">Step 1</div>
+        <h3 style="font-family: 'Outfit'; margin-bottom: 1rem;">Setup the Bookmarklet</h3>
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+            Make sure your Bookmarks Bar is visible in Chrome (press <strong>Ctrl + Shift + B</strong> or <strong>Cmd + Shift + B</strong> to toggle it).
+            Then, drag the button below directly into your bookmarks bar:
+        </p>
+        <div class="bookmark-btn-wrapper">
+            <a class="bookmark-btn pulse" href="javascript:(function(){const profile={name:'Harsh Sachan',firstName:'Harsh',lastName:'Sachan',email:'hsachan295@gmail.com',phone:'+91-8604304079',linkedin:'https://www.linkedin.com/in/harsh-sachan-b3b24a2a2',github:'https://github.com/hsachan295-source',portfolio:'https://github.com/hsachan295-source',location:'Greater Noida, UP, India',city:'Greater Noida',state:'Uttar Pradesh',country:'India',address:'Greater Noida, UP, India',university:'Galgotias College of Engineering and Technology',degree:'B.Tech Computer Science Engineering',gpa:'8.12',graduationYear:'2026'};function autofill(){const inputs=document.querySelectorAll('input,textarea,select');inputs.forEach(input=>{let labelText='';if(input.id){const label=document.querySelector(`label[for=%22${input.id}%22]`);if(label)labelText=label.innerText.toLowerCase();}if(!labelText){const parentLabel=input.closest('label');if(parentLabel)labelText=parentLabel.innerText.toLowerCase();}const name=(input.name||'').toLowerCase();const id=(input.id||'').toLowerCase();const placeholder=(input.placeholder||'').toLowerCase();const type=(input.type||'').toLowerCase();function matches(keywords){return keywords.some(k=>name.includes(k)||id.includes(k)||placeholder.includes(k)||labelText.includes(k));}if(type==='file'){input.style.border='2px dashed %2300ffd0';input.style.backgroundColor='rgba(0, 255, 208, 0.1)';return;}let valueToSet=null;if(matches(['first_name','firstname','givenname'])||(matches(['name'])&&!matches(['last','full','middle','user']))){valueToSet=profile.firstName;}else if(matches(['last_name','lastname','surname','familyname'])){valueToSet=profile.lastName;}else if(matches(['full_name','fullname','name'])&&!matches(['first','last'])){valueToSet=profile.name;}else if(matches(['email','mail'])){valueToSet=profile.email;}else if(matches(['phone','mobile','tel','contact'])){valueToSet=profile.phone;}else if(matches(['linkedin'])){valueToSet=profile.linkedin;}else if(matches(['github'])){valueToSet=profile.github;}else if(matches(['portfolio','website','blog','site','homepage'])){valueToSet=profile.portfolio;}else if(matches(['location','address','city','residence'])){if(matches(['city']))valueToSet=profile.city;else if(matches(['state']))valueToSet=profile.state;else if(matches(['country']))valueToSet=profile.country;else valueToSet=profile.location;}else if(matches(['college','university','school','education'])){valueToSet=profile.university;}else if(matches(['degree','qualification'])){valueToSet=profile.degree;}else if(matches(['gpa','cgpa','grade'])){valueToSet=profile.gpa;}else if(matches(['grad','year','date'])){if(matches(['year']))valueToSet=profile.graduationYear;}if(valueToSet!==null){input.value=valueToSet;input.dispatchEvent(new Event('input',{bubbles:true}));input.dispatchEvent(new Event('change',{bubbles:true}));input.style.border='2px solid %2300ffd0';input.style.backgroundColor='rgba(0,255,208,0.05)';}});};autofill();const alertDiv=document.createElement('div');alertDiv.style.position='fixed';alertDiv.style.bottom='20px';alertDiv.style.right='20px';alertDiv.style.padding='15px 25px';alertDiv.style.backgroundColor='%2300ffd0';alertDiv.style.color='%23000';alertDiv.style.fontFamily='sans-serif';alertDiv.style.fontSize='14px';alertDiv.style.fontWeight='bold';alertDiv.style.borderRadius='8px';alertDiv.style.boxShadow='0 4px 12px rgba(0,255,208,0.3)';alertDiv.style.zIndex='999999';alertDiv.innerText='✨ Agent Autofilled Form Fields! Check %26 upload resume. ✨';document.body.appendChild(alertDiv);setTimeout(()=>alertDiv.remove(),4000);})();">🚀 Drag Me to Bookmarks Bar</a>
+        </div>
+    </div>
+
+    <div class="step-card">
+        <div class="step-number">Step 2</div>
+        <h3 style="font-family: 'Outfit'; margin-bottom: 1rem;">How to Use</h3>
+        <ol>
+            <li>Open Chrome and navigate to any job application page (like <strong>Greenhouse</strong>, <strong>Lever</strong>, etc.).</li>
+            <li>Click the <strong>🚀 Drag Me to Bookmarks Bar</strong> bookmark you just added.</li>
+            <li>The script will instantly autofill your name, email, phone, LinkedIn, GitHub, college, and other fields, and highlight them in green.</li>
+            <li>Drag & drop your compiled CV PDF into the file field and hit <strong>Submit</strong>!</li>
+        </ol>
+    </div>
+
+    <div class="test-sandbox">
+        <div class="sandbox-title">🧪 Try it Out Live (Test Area)</div>
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.95rem;">
+            Click the bookmark in your bookmarks bar right now to see it fill these test fields instantly!
+        </p>
+        <form class="grid" onsubmit="event.preventDefault();">
+            <div class="form-group">
+                <label for="first_name">First Name</label>
+                <input type="text" id="first_name" placeholder="John">
+            </div>
+            <div class="form-group">
+                <label for="last_name">Last Name</label>
+                <input type="text" id="last_name" placeholder="Doe">
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" placeholder="example@domain.com">
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="text" id="phone" placeholder="+91-1234567890">
+            </div>
+            <div class="form-group">
+                <label for="linkedin">LinkedIn URL</label>
+                <input type="text" id="linkedin" name="urls[LinkedIn]" placeholder="https://linkedin.com/...">
+            </div>
+            <div class="form-group">
+                <label for="github">GitHub URL</label>
+                <input type="text" id="github" name="urls[GitHub]" placeholder="https://github.com/...">
+            </div>
+            <div class="form-group" style="grid-column: span 2;">
+                <label for="resume">Resume / CV File</label>
+                <input type="file" id="resume">
+            </div>
+        </form>
+    </div>
+
+    <div class="footer">
+        © 2026 Harsh Sachan Job Application Workspace. Crafted with ❤️ for maximum study focus.
+    </div>
+</div>
+
+</body>
+</html>
