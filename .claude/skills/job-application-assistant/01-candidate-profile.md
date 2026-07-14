@@ -30,13 +30,20 @@ Greater Noida, UP, India
 - Deployed multiple applications to Hugging Face Spaces using Docker, enabling cloud inference serving and live model analytics.
 
 ## Independent Projects
-- **NexCart – Full-Stack E-Commerce Product Management System**: Built production-ready REST API using FastAPI and Pydantic v2 cross-field validators. Engineered 5-module Streamlit admin dashboard with KPI analytics and Plotly charts.
-- **Agentic RAG System with Gemini and Pinecone**: Developed Retrieval-Augmented Generation pipeline using Pinecone vector database for semantic similarity search. Implemented agentic knowledge retrieval using LangChain and Gemini API for PDF question-answering.
+- **Team Task Manager**: Full Stack MERN application for project & task management with role-based access control, JWT authentication, and a real-time dashboard with glassmorphism UI. Deployed at [Live Site](https://team-task-manager-gamma-khaki.vercel.app).
+- **CineSuggest — Premium AI Movie Recommendation System**: Flask content-based filtering system (TF-IDF vectorizer + Cosine Similarity matching 39k+ films in under 0.05s) featuring Autocomplete, backdrop blurring, and HTML5 Canvas poster generation. [Live Site](https://movie-recommendation-system-5gbq.onrender.com) | [GitHub](https://github.com/hsachan295-source/Movie-Recommendation-System)
 - **Ollama Code Assistant**: Built an interactive, local AI Code Teaching Assistant named "AmitCodes" using Python, Gradio, and Ollama (customizing a local CodeLlama model using a custom Modelfile). [GitHub](https://github.com/hsachan295-source/Ollama-Code-Assistant)
 - **Astra DB PDF RAG with Ollama**: Developed a Retrieval-Augmented Generation (RAG) workflow using Astra DB as a vector database, Ollama for local embeddings (nomic-embed-text) and generation (gemma3:1b), and LangChain for orchestration. [GitHub](https://github.com/hsachan295-source/astra-db-pdf-rag-ollama)
-- **NeuralPrice – AI Laptop Price Predictor**: Trained a 4-layer ANN with 337 features using TensorFlow and Scikit-Learn. Containerized with Docker and deployed on Hugging Face Spaces for real-time multi-currency price predictions.
-- **NeuralClass – NLP Spam Classifier**: Built a GRU-based sequence model with TensorFlow/Keras. Served model via FastAPI REST API with prediction logging, Docker containerization, and Hugging Face deployment.
-- **SavorShield – Fruit Freshness Classifier**: Deployed a CNN-based image classification model using TensorFlow/Keras and Flask. Model generalizes across out-of-distribution inputs.
+- **Agentic RAG System with Gemini and Pinecone**: Developed Retrieval-Augmented Generation pipeline using Pinecone vector database for semantic similarity search. Implemented agentic knowledge retrieval using LangChain and Gemini API for PDF question-answering. [GitHub](https://github.com/hsachan295-source/Agentic-RAG-with-Gemini-and-Pinecone)
+- **Personality Deduction App**: ML-powered Streamlit app predicting Extrovert / Introvert / Ambivert from 16+ personality trait scores using Logistic Regression with StandardScaler. Achieve 99.75% accuracy. [Live Site](https://personality-deduction-meizhmfpxrk94kh4vvbrcv.streamlit.app/) | [GitHub](https://github.com/hsachan295-source/Ollama-Code-Assistant)
+- **CarValue Predictor**: Used resale price estimator using a tuned Decision Tree Regressor (~84% test accuracy R²). [Live Site](https://car-value-predictor-syzumzqetpxap4hrcdrtcc.streamlit.app/) | [GitHub](https://github.com/hsachan295-source/Car-Value-Predictor)
+- **XGBoost Student Score Predictor**: ML web app predicting exam scores from 7 academic and lifestyle features using a tuned XGBoost Regressor. [Live Site](https://xgboost-score-predictor-owypx692zb6a7knrqwqkq2.streamlit.app/) | [GitHub](https://github.com/hsachan295-source/XGBoost-Score-Predictor)
+- **Delivery Time Predictor**: Estimated delivery time predictor using a Random Forest Regressor (100 Trees, Max Depth 10) with SLA classification (Express/Same-day/Standard). [Live Site](https://26-rf-deliverytime-project-3whxuy9j7arigba4snusp7.streamlit.app/) | [GitHub](https://github.com/hsachan295-source/26-RF-Delivery_time-project)
+- **AI Loan Approval System**: Credit risk assessment system using Gaussian Naive Bayes (84.97% test accuracy). [Live Site](https://ai-loan-approval-system-wbb5tudpscpd7fguervc84.streamlit.app/)
+- **SmartHealth Predictor**: Disease risk prediction using Decision Tree Classifier (~75% accuracy) with interactive tree visualization. [Live Site](https://smart-business-dashboard-qn28wtm4jyu9hdqs4kmo78.streamlit.app/)
+- **NeuralPrice – AI Laptop Price Predictor**: Trained a 4-layer ANN with 337 features using TensorFlow and Scikit-Learn. Containerized with Docker and deployed on Hugging Face Spaces for real-time multi-currency price predictions. [Live Site](https://huggingface.co/spaces/Harsh0809/laptop-price-predictor-Ann) | [GitHub](https://github.com/hsachan295-source/Laptop-Price-Prediction-ANN)
+- **NeuralClass – NLP Spam Classifier**: Built a GRU-based sequence model with TensorFlow/Keras. Served model via FastAPI REST API with prediction logging, Docker containerization, and Hugging Face deployment. [Live Site](https://huggingface.co/spaces/Harsh0809/gru-text-classifier) | [GitHub](https://github.com/hsachan295-source/Email-Spam-Detector)
+- **SavorShield – Fruit Freshness Classifier**: Deployed a CNN-based image classification model using TensorFlow/Keras and Flask. Model generalizes across out-of-distribution inputs. [Live Site](https://huggingface.co/spaces/Harsh0809/fruit-quality-classification-cnn) | [GitHub](https://github.com/hsachan295-source/Fruit-Quality-Classification-CNN)
 - **AuraWeather – Real-Time Weather Analytics Dashboard**: Weather dashboard with geocoding, hourly dual-axis Plotly charts, and REST API data ingestion with caching. Containerized with Docker.
 - **AI \& ML Jobs Market Analytics Dashboard**: Architected a Power BI dashboard using a star-schema model and advanced DAX measures to analyze global hiring, salaries, and remote work trends.
 
@@ -46,6 +53,8 @@ Greater Noida, UP, India
 - **Python** (Expert): TensorFlow, Keras, Scikit-Learn, PyTorch, LangChain, LangGraph, Pandas, NumPy, FastAPI, Flask, Streamlit, Pydantic v2
 - **SQL** (Advanced): PostgreSQL, MySQL, database modeling, querying, optimization, Star Schema, DAX
 - **C++ & Java** (Intermediate): Algorithms, data structures, and problem-solving
+- **Frontend Development**: React.js, Tailwind CSS, Bootstrap 5, HTML5/CSS3, JavaScript (ES6+)
+- **Backend Development**: Node.js, Express.js, JWT Authentication, REST APIs
 
 ### Domain Expertise
 - **Generative AI & Agents**: Retrieval-Augmented Generation (RAG), Agentic AI, ReAct Agents, Tool Calling, LangGraph Workflows, Prompt Engineering, Embeddings, Semantic Search
@@ -62,6 +71,7 @@ Greater Noida, UP, India
 ## Awards & Certifications
 - **Oracle Certified Data Science Professional 2025**
 - **Oracle Certified AI Foundations Associate 2025**
+- **IBM SkillsBuild: Introduction to Artificial Intelligence**
 - **HackerRank Advanced SQL, Problem Solving, and Software Engineer Intern Certified**
 - **Google Cloud Introduction to Generative AI**
 - **TATA GenAI Data Analytics, Deloitte Data Analytics, Walmart Advanced Software Engineering** (Virtual Experiences)
