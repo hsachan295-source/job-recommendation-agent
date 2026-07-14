@@ -77,7 +77,7 @@ DATA_ANALYTICS_PROJECTS = r"""\noindent\textbf{IPL Performance Dashboard} $|$ \t
 \resumeItem{Developed an interactive HR analytics dashboard to monitor and analyze employee attrition trends.}
 \resumeItem{Visualized attrition metrics dynamically by department, age group, gender, salary brackets, and specific job roles.}
 \resumeItem{Utilized conditional formatting and advanced Excel charts to surface actionable workforce retention insights.}
-\;/itemize}
+\end{itemize}
 
 \vspace{1.5pt}
 \noindent\textbf{SQL Data Analysis Project} $|$ \textit{SQL, MySQL, Window Functions, CTEs, Database Optimization} \hfill
