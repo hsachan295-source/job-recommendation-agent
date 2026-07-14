@@ -31,9 +31,11 @@ This repo is a job application workspace. Claude acts as a career advisor and ap
 - **Lead Developer & AI Architect** (2024 - Present) - **Independent Projects** (Greater Noida, UP)
   - Engineered **NexCart**, a full-stack FastAPI & Streamlit system with Pydantic v2 cross-field validators.
   - Built **Agentic RAG System** with LangChain, Pinecone, and Gemini API for PDF question-answering.
+  - Built **Ollama Code Assistant**, an interactive local AI code teaching assistant named "AmitCodes" using Python, Gradio, and Ollama.
+  - Developed **Astra DB PDF RAG with Ollama**, a RAG workflow using Astra DB, local Ollama embeddings/models, and LangChain.
   - Designed **NeuralPrice** (4-layer ANN with 337 features, Docker, Hugging Face) and **NeuralClass** (GRU NLP Classifier, FastAPI).
   - Developed **SavorShield** (CNN Computer Vision Freshness Classifier) and **AuraWeather** (Real-Time Weather Analytics).
-  - Architected **AI & ML Jobs Market Analytics** Power BI dashboard with star-schema models.
+  - Architected **AI \& ML Jobs Market Analytics** Power BI dashboard with star-schema models.
 
 ### Technical Skills
 - **Primary:** Python, SQL, Machine Learning (Supervised/Unsupervised), Generative AI, RAG, Agentic AI, FastAPI, Streamlit, Power BI

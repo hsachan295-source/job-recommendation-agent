@@ -31,12 +31,14 @@ Greater Noida, UP, India
 
 ## Independent Projects
 - **NexCart – Full-Stack E-Commerce Product Management System**: Built production-ready REST API using FastAPI and Pydantic v2 cross-field validators. Engineered 5-module Streamlit admin dashboard with KPI analytics and Plotly charts.
-- **Agentic RAG System with Gemini and Pinecone**: Developed Retrieval-Augmented Generation pipeline using Pinecone vector store for semantic similarity search. Implemented agentic knowledge retrieval using LangChain and Gemini API for PDF question-answering.
+- **Agentic RAG System with Gemini and Pinecone**: Developed Retrieval-Augmented Generation pipeline using Pinecone vector database for semantic similarity search. Implemented agentic knowledge retrieval using LangChain and Gemini API for PDF question-answering.
+- **Ollama Code Assistant**: Built an interactive, local AI Code Teaching Assistant named "AmitCodes" using Python, Gradio, and Ollama (customizing a local CodeLlama model using a custom Modelfile). [GitHub](https://github.com/hsachan295-source/Ollama-Code-Assistant)
+- **Astra DB PDF RAG with Ollama**: Developed a Retrieval-Augmented Generation (RAG) workflow using Astra DB as a vector database, Ollama for local embeddings (nomic-embed-text) and generation (gemma3:1b), and LangChain for orchestration. [GitHub](https://github.com/hsachan295-source/astra-db-pdf-rag-ollama)
 - **NeuralPrice – AI Laptop Price Predictor**: Trained a 4-layer ANN with 337 features using TensorFlow and Scikit-Learn. Containerized with Docker and deployed on Hugging Face Spaces for real-time multi-currency price predictions.
 - **NeuralClass – NLP Spam Classifier**: Built a GRU-based sequence model with TensorFlow/Keras. Served model via FastAPI REST API with prediction logging, Docker containerization, and Hugging Face deployment.
 - **SavorShield – Fruit Freshness Classifier**: Deployed a CNN-based image classification model using TensorFlow/Keras and Flask. Model generalizes across out-of-distribution inputs.
 - **AuraWeather – Real-Time Weather Analytics Dashboard**: Weather dashboard with geocoding, hourly dual-axis Plotly charts, and REST API data ingestion with caching. Containerized with Docker.
-- **AI & ML Jobs Market Analytics Dashboard**: Architected a Power BI dashboard using a star-schema model and advanced DAX measures to analyze global hiring, salaries, and remote work trends.
+- **AI \& ML Jobs Market Analytics Dashboard**: Architected a Power BI dashboard using a star-schema model and advanced DAX measures to analyze global hiring, salaries, and remote work trends.
 
 ## Technical Skills
 
