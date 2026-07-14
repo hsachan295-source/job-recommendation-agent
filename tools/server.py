@@ -29,7 +29,43 @@ class ApplicationPayload(BaseModel):
     category: str
 
 # Serve CV folder for PDF downloads
-app.mount("/cv", StaticFiles(directory=CV_DIR), name="cv")
+@app.get("/cv/{pdf_name}")
+def get_pdf_file(pdf_name: str):
+    pdf_path = os.path.join(CV_DIR, pdf_name)
+    
+    # If the PDF does not exist, compile it on-demand!
+    if not os.path.exists(pdf_path):
+        if pdf_name.startswith("main_") and pdf_name.endswith(".pdf"):
+            clean_company = pdf_name[5:-4]
+            # Search database for matching company information
+            company_name = clean_company.capitalize()
+            category = "DS"
+            role = "Data Scientist"
+            
+            if os.path.exists(DB_PATH):
+                try:
+                    with open(DB_PATH, "r", encoding="utf-8") as f:
+                        data = json.load(f)
+                    for app_record in data:
+                        rec_clean = "".join(c for c in app_record["company"] if c.isalnum()).lower()
+                        if rec_clean == clean_company:
+                            company_name = app_record["company"]
+                            category = app_record["category"]
+                            role = app_record["role"]
+                            break
+                except Exception:
+                    pass
+            
+            print(f"\n[On-Demand Server] Compiling dynamic resume for {company_name} ({role})...")
+            tailor_cv(company_name, category, role)
+            
+    if os.path.exists(pdf_path):
+        return FileResponse(pdf_path)
+    else:
+        tex_path = pdf_path.replace(".pdf", ".tex")
+        if os.path.exists(tex_path):
+            return FileResponse(tex_path, media_type="text/plain")
+        raise HTTPException(status_code=404, detail="PDF resume not found and compilation failed.")
 app.mount("/tools", StaticFiles(directory=os.path.join(WORKSPACE_DIR, "tools")), name="tools")
 
 @app.get("/")
