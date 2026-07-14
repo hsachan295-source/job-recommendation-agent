@@ -33,8 +33,21 @@ class ApplicationPayload(BaseModel):
 def get_pdf_file(pdf_name: str):
     pdf_path = os.path.join(CV_DIR, pdf_name)
     
-    # If the PDF does not exist, compile it on-demand!
+    # If the PDF does not exist, or the base CV template is newer (updated), compile it!
+    base_tex_path = os.path.join(CV_DIR, "main_harsh.tex")
+    should_compile = False
+    
     if not os.path.exists(pdf_path):
+        should_compile = True
+    elif os.path.exists(base_tex_path):
+        # Compare last modified times
+        base_mtime = os.path.getmtime(base_tex_path)
+        pdf_mtime = os.path.getmtime(pdf_path)
+        if base_mtime > pdf_mtime:
+            print(f"\n[On-Demand Server] Base template updated. Regenerating CV...")
+            should_compile = True
+            
+    if should_compile:
         if pdf_name.startswith("main_") and pdf_name.endswith(".pdf"):
             clean_company = pdf_name[5:-4]
             # Search database for matching company information
