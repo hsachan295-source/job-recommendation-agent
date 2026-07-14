@@ -1,0 +1,104 @@
+%% Tailored CV for Sun King - ML Engineer
+%% Compiled with: lualatex main_sunking.tex
+
+\documentclass[11pt,a4paper,sans]{moderncv}
+\moderncvstyle{banking}
+\moderncvcolor{blue}
+
+\renewcommand*{\firstnamestyle}[1]{{\fontsize{34}{36}\bfseries\upshape\color{color1}#1}}
+\renewcommand*{\lastnamestyle}[1]{{\fontsize{34}{36}\bfseries\upshape\color{color1}#1}}
+\renewcommand*{\sectionstyle}[1]{{\sectionfont\color{color1}#1}}
+
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    urlcolor=blue,
+    pdftitle={Harsh Sachan - Sun King ML Engineer CV},
+    pdfpagemode=FullScreen,
+}
+\usepackage[scale=0.80]{geometry}
+\usepackage{import}
+
+\name{Harsh}{Sachan}
+\address{Greater Noida, Uttar Pradesh, India}{}{}
+\phone[mobile]{+91 8604304079}
+\email{hsachan295@gmail.com}
+\extrainfo{\href{https://linkedin.com/in/harsh-sachan-b3b24a2a2}{LinkedIn} | \href{https://github.com/hsachan295-source}{GitHub} | \href{https://leetcode.com/Harshsachan2001/}{LeetCode}}
+
+\begin{document}
+
+\makecvtitle
+
+\vspace{6pt}
+\small{Aspiring Machine Learning Engineer with a B.Tech in CSE (AI Specialization) from Galgotias College. Strong background in deep learning models (ANN, CNN, GRU, LSTM), computer vision systems, and speech/audio preprocessing. Experienced in Docker containerization and deploying low-latency REST endpoints for public model serving.}
+
+\section{Core Competencies}
+\vspace{1pt}
+\begin{itemize}
+\item \textbf{Deep Learning \& Vision}: TensorFlow, Keras, CNN, OpenCV, Object Detection, Image Classification, Data Augmentation
+\item \textbf{Languages \& Databases}: Python, SQL, C++, Java, PostgreSQL, MySQL, MongoDB, Pinecone, ChromaDB
+\item \textbf{GenAI \& Agents}: RAG pipelines, LangChain, Pinecone, Gemini API, Semantic Search
+\item \textbf{Frameworks \& BI}: FastAPI, Flask, Streamlit, Pandas, NumPy, Power BI
+\item \textbf{Cloud \& Deployment}: Docker, Hugging Face Spaces, Git, GitHub, OCI, GCP
+\end{itemize}
+
+\section{Projects \& Experience}
+\vspace{3pt}
+\begin{itemize}
+
+\item{\cventry{2025}{SavorShield -- Fruit Freshness Classifier}{Independent}{Greater Noida, India}{}{\vspace{1pt}
+\begin{itemize}
+    \item Developed a CNN-based image classification model for fruit freshness detection using TensorFlow/Keras.
+    \item Implemented image preprocessing, data augmentation, and confidence scoring.
+    \item Deployed the Flask inference pipeline on Hugging Face Spaces demonstrating out-of-distribution model generalization.
+\end{itemize}}}
+
+\vspace{3pt}
+
+\item{\cventry{2024}{NeuralPrice -- AI Laptop Price Predictor}{Independent}{Greater Noida, India}{}{\vspace{1pt}
+\begin{itemize}
+    \item Engineered a 4-layer ANN with 337 features via one-hot encoding; containerized with Docker and deployed on Hugging Face.
+\end{itemize}}}
+
+\vspace{3pt}
+
+\item{\cventry{2024}{NeuralClass -- NLP Spam Classifier}{Independent}{Greater Noida, India}{}{\vspace{1pt}
+\begin{itemize}
+    \item Trained a GRU sequence classifier, served via FastAPI, containerized with Docker, and deployed on Hugging Face.
+\end{itemize}}}
+
+\end{itemize}
+
+\section{Education}
+\vspace{1pt}
+\begin{itemize}
+\item{\cventry{2022--2026}{B.Tech in Computer Science Engineering (AI Specialization)}{Galgotias College of Engineering and Technology}{Greater Noida, UP, India}{}{\vspace{1pt}
+CGPA: 8.12 / 10.0\\
+Key Topics: Deep Learning, Computer Vision, Natural Language Processing, Machine Learning, Databases.
+}}
+\end{itemize}
+
+\section{Languages}
+\vspace{1pt}
+\begin{itemize}
+\item English (Professional), Hindi (Native).
+\end{itemize}
+
+\section{Certifications}
+\vspace{1pt}
+\begin{itemize}
+\item \textbf{Oracle}: OCI 2025 Certified Data Science Professional | OCI 2025 Certified AI Foundations Associate
+\item \textbf{HackerRank}: SQL (Advanced), Problem Solving, Software Engineer Intern
+\item \textbf{Experiences}: Google Cloud GenAI | TATA, Deloitte, Walmart Virtual Experience Certifications
+\end{itemize}
+
+\section{References}
+\vspace{1pt}
+\begin{itemize}
+\item Available upon request.
+\end{itemize}
+
+\end{document}

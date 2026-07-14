@@ -1,0 +1,105 @@
+%% Tailored CV for Factored - Machine Learning Engineer (LLMs & Knowledge Graphs)
+%% Compiled with: lualatex main_factored.tex
+
+\documentclass[11pt,a4paper,sans]{moderncv}
+\moderncvstyle{banking}
+\moderncvcolor{blue}
+
+\renewcommand*{\firstnamestyle}[1]{{\fontsize{34}{36}\bfseries\upshape\color{color1}#1}}
+\renewcommand*{\lastnamestyle}[1]{{\fontsize{34}{36}\bfseries\upshape\color{color1}#1}}
+\renewcommand*{\sectionstyle}[1]{{\sectionfont\color{color1}#1}}
+
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    urlcolor=blue,
+    pdftitle={Harsh Sachan - Factored ML Engineer CV},
+    pdfpagemode=FullScreen,
+}
+\usepackage[scale=0.80]{geometry}
+\usepackage{import}
+
+\name{Harsh}{Sachan}
+\address{Greater Noida, Uttar Pradesh, India}{}{}
+\phone[mobile]{+91 8604304079}
+\email{hsachan295@gmail.com}
+\extrainfo{\href{https://linkedin.com/in/harsh-sachan-b3b24a2a2}{LinkedIn} | \href{https://github.com/hsachan295-source}{GitHub} | \href{https://leetcode.com/Harshsachan2001/}{LeetCode}}
+
+\begin{document}
+
+\makecvtitle
+
+\vspace{6pt}
+\small{Aspiring Machine Learning Engineer with a B.Tech in CSE (AI Specialization) from Galgotias College. Expert in building Retrieval-Augmented Generation (RAG) pipelines, semantic similarity search, and agentic workflows using LLMs. Highly skilled in Python, SQL, and database indexing (Pinecone, Astra DB, PostgreSQL) with experience serving models via REST APIs (FastAPI/Flask).}
+
+\section{Core Competencies}
+\vspace{1pt}
+\begin{itemize}
+\item \textbf{Generative AI \& LLMs}: RAG pipelines, Agentic AI, LangChain, LangGraph Workflows, Prompt Engineering, Semantic Search, Word Embeddings, Knowledge Graphs, Ollama
+\item \textbf{Languages \& Databases}: Python, SQL, C++, Java, PostgreSQL, MySQL, MongoDB, Pinecone, Astra DB
+\item \textbf{Machine Learning \& Deep Learning}: TensorFlow, Keras, Scikit-Learn, ANN, CNN, GRU, LSTM, NLP Sequence Classification
+\item \textbf{Frameworks \& Deployment}: FastAPI, Flask, Streamlit, Gradio, Docker, Hugging Face Spaces, Git, GitHub
+\end{itemize}
+
+\section{Projects \& Experience}
+\vspace{3pt}
+\begin{itemize}
+
+\item{\cventry{2025}{Astra DB PDF RAG with Ollama}{Independent}{Greater Noida, India}{}{\vspace{1pt}
+\begin{itemize}
+    \item Developed a PDF Retrieval-Augmented Generation (RAG) system using Astra DB as a cloud vector database.
+    \item Integrated Ollama locally for generating vector embeddings (nomic-embed-text) and chat response generation (gemma3:1b) using LangChain.
+    \item Orchestrated document processing (PDF parsing, text chunking) and vector queries using LangChain.
+\end{itemize}}}
+
+\vspace{3pt}
+
+\item{\cventry{2025}{Agentic RAG System with Gemini and Pinecone}{Independent}{Greater Noida, India}{}{\vspace{1pt}
+\begin{itemize}
+    \item Built a Retrieval-Augmented Generation pipeline using Pinecone vector database for semantic similarity search.
+    \item Developed agentic knowledge retrieval workflows using LangChain, LangGraph, and the Gemini API.
+\end{itemize}}}
+
+\vspace{3pt}
+
+\item{\cventry{2025}{Ollama Code Assistant}{Independent}{Greater Noida, India}{}{\vspace{1pt}
+\begin{itemize}
+    \item Developed an interactive, local AI Code Teaching Assistant named "AmitCodes" built with Python and Gradio.
+    \item Customized a local CodeLlama model via custom Modelfile settings (system prompt persona, temperature) for beginner-friendly programming support.
+\end{itemize}}}
+
+\end{itemize}
+
+\section{Education}
+\vspace{1pt}
+\begin{itemize}
+\item{\cventry{2022--2026}{B.Tech in Computer Science Engineering (AI Specialization)}{Galgotias College of Engineering and Technology}{Greater Noida, UP, India}{}{\vspace{1pt}
+CGPA: 8.12 / 10.0\\
+Key Topics: Natural Language Processing, Machine Learning, Deep Learning, Generative AI \& Agents, Vector Databases.
+}}
+\end{itemize}
+
+\section{Languages}
+\vspace{1pt}
+\begin{itemize}
+\item English (Professional), Hindi (Native).
+\end{itemize}
+
+\section{Certifications}
+\vspace{1pt}
+\begin{itemize}
+\item \textbf{Oracle}: OCI 2025 Certified Data Science Professional | OCI 2025 Certified AI Foundations Associate
+\item \textbf{IBM}: IBM SkillsBuild: Introduction to Artificial Intelligence
+\item \textbf{HackerRank \& Google}: SQL (Advanced), Problem Solving, Google Cloud GenAI
+\end{itemize}
+
+\section{References}
+\vspace{1pt}
+\begin{itemize}
+\item Available upon request.
+\end{itemize}
+
+\end{document}
